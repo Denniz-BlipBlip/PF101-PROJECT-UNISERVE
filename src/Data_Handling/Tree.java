@@ -3,8 +3,7 @@ import Users.Data;
 
 public class Tree 
 {
-  private int balance_factor(Node node){this
-
+  private int balance_factor(Node node){return !this.is_empty(node)?node.get_height():0;}
   private int height(Node node){return !this.is_empty(node)?node.get_height():0;}
   public Tree(){this.root=null;}
   
