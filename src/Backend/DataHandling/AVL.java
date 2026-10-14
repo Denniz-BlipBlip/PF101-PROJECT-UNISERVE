@@ -3,16 +3,23 @@ import Data.Users.UserData;
 
 public class AVL
 {
-  private Node delete(Node node,String userName,String userPassword)
+  public void insert(String userName,String userPassword,String userLocation,String userEmail,int userId,int userMobileNumber)
   {
-
+    this.root=this.insert(this.root, userName, userPassword, userLocation, userEmail, userId, userMobileNumber);
   }
 
-  private Node insert(Node node,String userName,String userPassword,String userLocation,int userId,int userMobileNumber)
+  private boolean search(Node node,String userName,String userPassword)
   {
-    if(this.isEmpty(node))return new Node(new UserData(userName, userLocation, userPassword, userId, userMobileNumber));
-    if(userId>node.getUserData().getUserId()){node.setRightNode(this.insert(node.getRightNode(), userName, userPassword, userLocation, userId, userMobileNumber));}
-    if(userId<node.getUserData().getUserId()){node.setLeftNode(this.insert(node.getLeftNode(), userName, userPassword, userLocation, userId, userMobileNumber));}
+    if(this.isEmpty(node))return false;
+    if(node.getUserData().getUserName().equals(userName)&&node.getUserData().getUserPassword().equals(userPassword))return true;
+    return this.search(node.getRightNode(), userName, userPassword)||this.search(node.getLeftNode(), userName, userPassword);
+  }
+
+  private Node insert(Node node,String userName,String userPassword,String userLocation,String  userEmail,int userId,int userMobileNumber)
+  {
+    if(this.isEmpty(node))return new Node(new UserData(userName, userLocation, userPassword,  userEmail, userId, userMobileNumber));
+    if(userId>node.getUserData().getUserId()){node.setRightNode(this.insert(node.getRightNode(), userName, userPassword, userLocation, userEmail, userId, userMobileNumber));}
+    if(userId<node.getUserData().getUserId()){node.setLeftNode(this.insert(node.getLeftNode(), userName, userPassword, userLocation, userEmail, userId, userMobileNumber));}
     return this.rebase(node);
   }
 
