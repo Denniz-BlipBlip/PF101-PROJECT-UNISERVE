@@ -3,16 +3,21 @@ import Data.Users.UserData;
 
 public class AVL
 {
+  public boolean search(String userEmail,String userPassword)
+  {
+    return this.search(this.root, userEmail, userPassword);
+  }
+
   public void insert(String userName,String userPassword,String userLocation,String userEmail,int userId,int userMobileNumber)
   {
     this.root=this.insert(this.root, userName, userPassword, userLocation, userEmail, userId, userMobileNumber);
   }
 
-  private boolean search(Node node,String userName,String userPassword)
+  private boolean search(Node node,String userEmail,String userPassword)
   {
     if(this.isEmpty(node))return false;
-    if(node.getUserData().getUserName().equals(userName)&&node.getUserData().getUserPassword().equals(userPassword))return true;
-    return this.search(node.getRightNode(), userName, userPassword)||this.search(node.getLeftNode(), userName, userPassword);
+    if(node.getUserData().getUserEmail().equals(userEmail)&&node.getUserData().getUserPassword().equals(userPassword))return true;
+    return this.search(node.getRightNode(), userEmail, userPassword)||this.search(node.getLeftNode(), userEmail, userPassword);
   }
 
   private Node insert(Node node,String userName,String userPassword,String userLocation,String  userEmail,int userId,int userMobileNumber)
