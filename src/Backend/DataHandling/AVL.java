@@ -3,6 +3,11 @@ import Data.Users.UserData;
 
 public class AVL
 {
+  public boolean validateUserId(int userId)
+  {
+    return this.userIdChecker(this.root, userId);
+  }
+
   public boolean search(String userEmail,String userPassword)
   {
     return this.search(this.root, userEmail, userPassword);
@@ -83,6 +88,14 @@ public class AVL
   private int balanceFactor(Node node)
   {
     return !this.isEmpty(node)?(this.height(node.getLeftNode())-this.height(node.getRightNode())):0;
+  }
+
+  private boolean userIdChecker(Node node,int userId)
+  {
+    if(this.isEmpty(node))return false;
+    if(userId>node.getUserData().getUserId())return this.userIdChecker(node.getRightNode(), userId);
+    else if(userId<node.getUserData().getUserId())return this.userIdChecker(node.getLeftNode(), userId);
+    else return true;
   }
 
   private int height(Node node){return !this.isEmpty(node)?node.getHeight():0;}
