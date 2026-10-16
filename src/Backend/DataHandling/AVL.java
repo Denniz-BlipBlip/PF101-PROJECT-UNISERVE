@@ -3,7 +3,7 @@ import Data.Users.UserData;
 
 public class AVL
 {
-  public boolean validateUserId(int userId)
+  public boolean validUserId(int userId)
   {
     return this.userIdChecker(this.root, userId);
   }
