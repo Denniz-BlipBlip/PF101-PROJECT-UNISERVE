@@ -6,10 +6,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-import java.util.Random;
 import Backend.DataHandling.AVL;
 import Backend.FileHandler.FileHandler;
 import Helper.FilePathHelper;
+import Helper.IdGenerator;
 
 public class DataManager implements FileHandler
 {
@@ -67,17 +67,7 @@ public class DataManager implements FileHandler
 
   private void registerUser(String userName,String userLocation,String userPassword,String userEmail,int userMobileNumber)
   {
-    this.userData.insert(userName, userPassword, userLocation, userEmail, this.idGenerator(), userMobileNumber);
-  }
-
-  private int idGenerator()
-  {
-    int userId;
-    do 
-    {
-      userId=this.randomizer.nextInt(900000)+100000;
-    }while(userData.validUserId(userId));
-    return userId;
+    this.userData.insert(userName, userPassword, userLocation, userEmail, IdGenerator.idGenerator(), userMobileNumber);
   }
 
   public static synchronized DataManager getInstance()
@@ -86,13 +76,7 @@ public class DataManager implements FileHandler
     return manager;
   }
 
-  private DataManager()
-  {
-    this.randomizer=new Random();
-    this.userData=new AVL();
-  }
-
+  private DataManager(){this.userData=new AVL();}
   private static DataManager manager;
-  private Random randomizer;
   private AVL userData;
 }
