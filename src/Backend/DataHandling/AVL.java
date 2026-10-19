@@ -1,4 +1,5 @@
 package Backend.DataHandling;
+import java.io.BufferedWriter;
 import Data.Users.UserData;
 
 public class AVL
@@ -16,6 +17,25 @@ public class AVL
   public void insert(String userName,String userPassword,String userLocation,String userEmail,int userId,int userMobileNumber)
   {
     this.root=this.insert(this.root, userName, userPassword, userLocation, userEmail, userId, userMobileNumber);
+  }
+
+  public void saveUserData(BufferedWriter writer){this.save(this.root, writer);}
+
+  private void save(Node node,BufferedWriter writer)
+  {
+    if(this.isEmpty(node))return;
+    save(node.getLeftNode(),writer);
+    writer.write
+    (
+                 node.getUserData().getUserId()+","+
+                 node.getUserData().getUserName()+","+
+                 node.getUserData().getUserEmail()+","+
+                 node.getUserData().getUserLocation()+","+
+                 node.getUserData().getUserPassword()+","+
+                 node.getUserData().getUserMobileNumber()
+    );
+    writer.newLine();
+    save(node.getRightNode(),writer);
   }
 
   private boolean search(Node node,String userEmail,String userPassword)
