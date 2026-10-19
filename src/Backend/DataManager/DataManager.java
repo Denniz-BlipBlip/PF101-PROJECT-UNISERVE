@@ -9,13 +9,14 @@ import java.util.List;
 import java.util.Random;
 import Backend.DataHandling.AVL;
 import Backend.FileHandler.FileHandler;
+import Helper.FilePathHelper;
 
 public class DataManager implements FileHandler
 {
   @Override 
   public void saveOrderData(List<String>order)
   {
-    File file=new File("/Data/Orders/OrdersData.txt");
+    File file=new File(FilePathHelper.ordersFilePath);
     try 
     {
       BufferedWriter writer=new BufferedWriter(new FileWriter(file,true));
@@ -28,7 +29,7 @@ public class DataManager implements FileHandler
   @Override
   public void loadData()
   {
-    File file=new File("/Data/UserAcc/UserAcc.txt");
+    File file=new File(FilePathHelper.accFilePath);
     try 
     {
       BufferedReader reader=new BufferedReader(new FileReader(file));
@@ -49,7 +50,7 @@ public class DataManager implements FileHandler
   @Override 
   public void saveData()
   {
-    File file=new File("/Data/UserAcc/UserAcc.txt");
+    File file=new File(FilePathHelper.accFilePath);
     try 
     {
       BufferedWriter writer=new BufferedWriter(new FileWriter(file,true));
@@ -90,7 +91,7 @@ public class DataManager implements FileHandler
     this.randomizer=new Random();
     this.userData=new AVL();
   }
-  
+
   private static DataManager manager;
   private Random randomizer;
   private AVL userData;
