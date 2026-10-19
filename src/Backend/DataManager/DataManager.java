@@ -60,14 +60,11 @@ public class DataManager implements FileHandler
     catch(IOException e){System.out.println(e);return;}
   }
 
-  private boolean validateLogin(String userEmail,String userPassword)
-  {
-    return this.userData.search(userEmail, userPassword);
-  }
-
+  private boolean validateLogin(String userEmail,String userPassword){return this.userData.search(userEmail, userPassword);}
   private void registerUser(String userName,String userLocation,String userPassword,String userEmail,int userMobileNumber)
   {
     this.userData.insert(userName, userPassword, userLocation, userEmail, IdGenerator.idGenerator(), userMobileNumber);
+    this.saveData();
   }
 
   public static synchronized DataManager getInstance()
