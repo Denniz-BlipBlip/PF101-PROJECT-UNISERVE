@@ -1,7 +1,6 @@
 package Backend.DataHandling;
 import java.io.BufferedWriter;
 import Data.Users.UserData;
-
 public class AVL
 {
   public boolean validUserId(int userId){return this.userIdChecker(this.root, userId);}

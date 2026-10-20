@@ -1,5 +1,8 @@
-public class App {
-    public static void main(String[] args) {
-        System.out.println("Hello from Uniserve-Terminal!");
-    }
+
+public class App 
+{
+  public static void main(String[]main)
+  {
+
+  }
 }
